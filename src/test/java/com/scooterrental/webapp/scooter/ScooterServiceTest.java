@@ -23,4 +23,4 @@ class ScooterServiceTest {
         assertThat(scooterService.findAllScooters()).containsExactlyInAnyOrder(scooter);
     }
 
-}
+}//

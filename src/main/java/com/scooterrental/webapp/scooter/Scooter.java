@@ -10,40 +10,53 @@ public class Scooter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String vinNumber;
-    private String town;
-
+    private String markOfScooter;
+    private String range;
+    private String batteryCondition;
     public Scooter() {
     }
 
-    public Scooter(long id, String VINOfScooter, String town) {
+    public Scooter(long id, String markOfScooter, String range, String batteryCondition) {
         this.id = id;
-        this.vinNumber = VINOfScooter;
-        this.town = town;
+        this.markOfScooter = markOfScooter;
+        this.range = range;
+        this.batteryCondition = batteryCondition;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getVINOfScooter() {
-        return vinNumber;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setVINOfScooter(String VINOfScooter) {
-        this.vinNumber = VINOfScooter;
+    public String getMarkOfScooter() {
+        return markOfScooter;
     }
 
-    public String getTown() {
-        return town;
+    public void setMarkOfScooter(String markOfScooter) {
+        this.markOfScooter = markOfScooter;
     }
 
-    public void setTown(String town) {
-        this.town = town;
+    public String getRange() {
+        return range;
+    }
+
+    public void setRange(String range) {
+        this.range = range;
+    }
+
+    public String getBatteryCondition() {
+        return batteryCondition;
+    }
+
+    public void setBatteryCondition(String batteryCondition) {
+        this.batteryCondition = batteryCondition;
     }
 
     void update(Scooter scooter) {
-        this.vinNumber = scooter.getVINOfScooter();
-        this.town = scooter.getTown();
+        this.markOfScooter = scooter.getMarkOfScooter();
+        this.range = scooter.getRange();
     }
 }

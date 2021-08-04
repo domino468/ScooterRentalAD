@@ -8,9 +8,9 @@ import java.util.Optional;
 @Repository
 public interface ScooterRepository extends JpaRepository<Scooter, Long> {
 
-    Optional<Scooter> findScooterByVinNumber(ScooterDTO vinNumber);
+    Optional<Scooter> findScooterByMark(ScooterDTO markOfScooter);
 
-    Optional<Scooter> updateScooterByTown(String town);
+    Optional<Scooter> updateScooterByRange(String range);
 
-    void deleteScooterByVinNumber(String VINNumber);
+    void deleteScooterByMark(String markOfScooter);
 }

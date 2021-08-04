@@ -15,8 +15,8 @@ public class ScooterService {
     }
 
     public ScooterDTO add(ScooterDTO scooterDTO) {
-        Optional<Scooter> customerByMail = scooterRepository
-                .findScooterByVinNumber(scooterDTO);
+        Optional<Scooter> scooterByMark = scooterRepository
+                .findScooterByMark(scooterDTO);
 
         Scooter scooter = scooterRepository.save(convertDTOToScooter(scooterDTO));
         return convertScooterToDTO(scooter);
@@ -31,30 +31,31 @@ public class ScooterService {
 
     ScooterDTO update(ScooterDTO updatedScooter) {
         Optional<Scooter> optionalScooter = scooterRepository
-                .updateScooterByTown((updatedScooter.getTown()));
+                .updateScooterByRange((updatedScooter.getRange()));
         Scooter existingScooter = optionalScooter.orElseThrow(ScooterNotFoundException::new);
         existingScooter.update(convertDTOToScooter(updatedScooter));
         scooterRepository.save(existingScooter);
         return convertScooterToDTO(existingScooter);
     }
 
-    void deleteScooterByVINNumber(String VINNumber) {
-        scooterRepository.deleteScooterByVinNumber(VINNumber);
+    void deleteScooterByMark(String markOfScooter) {
+        scooterRepository.deleteScooterByMark(markOfScooter);
     }
 
     private ScooterDTO convertScooterToDTO(Scooter scooter) {
         return new ScooterDTO(
-                scooter.getVINOfScooter(),
-                scooter.getTown()
+                scooter.getMarkOfScooter(),
+                scooter.getRange(),
+                scooter.getBatteryCondition()
 
         );
     }
 
     private Scooter convertDTOToScooter(ScooterDTO scooterDTO) {
         Scooter scooter = new Scooter();
-        scooter.setVINOfScooter(scooterDTO.getVINNumber());
-        scooter.setTown(scooterDTO.getTown());
-
+        scooter.setMarkOfScooter(scooterDTO.getMarkOfScooter());
+        scooter.setRange(scooterDTO.getRange());
+        scooter.setBatteryCondition(scooterDTO.getBatteryCondition());
         return scooter;
 
     }

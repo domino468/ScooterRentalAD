@@ -1,5 +1,7 @@
 package com.scooterrental.webapp.user;
 
+import com.scooterrental.webapp.scooter.Scooter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -60,5 +62,12 @@ public class User {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    void updateUser(User user) {
+        this.name = user.getName();
+        this.lastName = user.getLastName();
+        this.phoneNumber = user.getPhoneNumber();
+        this.mail = user.getMail();
     }
 }

@@ -1,5 +1,8 @@
 package com.scooterrental.webapp.user;
 
+import com.scooterrental.webapp.scooter.Scooter;
+import com.scooterrental.webapp.scooter.ScooterDTO;
+import com.scooterrental.webapp.scooter.ScooterNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -30,6 +33,8 @@ public class UserService {
                 .map(this::convertUserToDTO)
                 .collect(Collectors.toList());
     }
+
+
 
     void deleteUserByMail(String mail) {
         userRepository.deleteUserByMail(mail);

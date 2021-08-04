@@ -58,5 +58,6 @@ public class Scooter {
     void update(Scooter scooter) {
         this.markOfScooter = scooter.getMarkOfScooter();
         this.range = scooter.getRange();
+        this.batteryCondition = scooter.getBatteryCondition();
     }
 }

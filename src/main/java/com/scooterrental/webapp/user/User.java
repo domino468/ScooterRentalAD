@@ -64,7 +64,7 @@ public class User {
         this.mail = mail;
     }
 
-    void updateUser(User user) {
+    void update(User user) {
         this.name = user.getName();
         this.lastName = user.getLastName();
         this.phoneNumber = user.getPhoneNumber();

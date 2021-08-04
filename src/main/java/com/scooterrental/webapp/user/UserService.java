@@ -1,8 +1,5 @@
 package com.scooterrental.webapp.user;
 
-import com.scooterrental.webapp.scooter.Scooter;
-import com.scooterrental.webapp.scooter.ScooterDTO;
-import com.scooterrental.webapp.scooter.ScooterNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,12 +16,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    User add(UserDTO userDTO) {
+    UserDTO add(UserDTO userDTO) {
         Optional<User> userByMail = userRepository
                 .findUserByMail(userDTO.getMail());
 
         User user = userRepository.save(convertDTOToUser(userDTO));
-        return convertDTOToUser(userDTO);
+        return convertUserToDTO(user);
     }
 
     List<UserDTO> findAllUsers() {
@@ -34,7 +31,14 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-
+    UserDTO update( UserDTO updatedUser) {
+        Optional<User> existingUser = userRepository
+                .findUserByMail(updatedUser.getMail());
+        User user = existingUser.orElseThrow(UserNotFoundException::new);
+        user.update(convertDTOToUser(updatedUser));
+        userRepository.save(user);
+        return convertUserToDTO(user);
+    }
 
     void deleteUserByMail(String mail) {
         userRepository.deleteUserByMail(mail);

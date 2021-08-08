@@ -8,16 +8,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class ScooterService {
-    private ScooterRepository scooterRepository;
+    private final ScooterRepository scooterRepository;
 
     public ScooterService(ScooterRepository scooterRepository) {
         this.scooterRepository = scooterRepository;
     }
 
     public ScooterDTO add(ScooterDTO scooterDTO) {
-        Optional<Scooter> scooterByMark = scooterRepository
-                .findScooterByMark(scooterDTO);
-
         Scooter scooter = scooterRepository.save(convertDTOToScooter(scooterDTO));
         return convertScooterToDTO(scooter);
     }
@@ -30,16 +27,15 @@ public class ScooterService {
     }
 
     ScooterDTO update(ScooterDTO updatedScooter) {
-        Optional<Scooter> optionalScooter = scooterRepository
-                .updateScooterByRange((updatedScooter.getRange()));
-        Scooter existingScooter = optionalScooter.orElseThrow(ScooterNotFoundException::new);
+
+        Scooter existingScooter = new Scooter();
         existingScooter.update(convertDTOToScooter(updatedScooter));
         scooterRepository.save(existingScooter);
         return convertScooterToDTO(existingScooter);
     }
 
     void deleteScooterByMark(String markOfScooter) {
-        scooterRepository.deleteScooterByMark(markOfScooter);
+        scooterRepository.deleteScooterByMarkOfScooter(markOfScooter);
     }
 
     private ScooterDTO convertScooterToDTO(Scooter scooter) {

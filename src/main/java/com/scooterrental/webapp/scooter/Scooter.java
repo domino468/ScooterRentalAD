@@ -10,9 +10,12 @@ public class Scooter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    //IDENTYFIKATOR BIZENSOWY (barcode)
     private String markOfScooter;
+    //range zapisany za pomoca int
     private String range;
-    private String batteryCondition;
+    //enum batterycondition
+    private  String batteryCondition ;
     public Scooter() {
     }
 

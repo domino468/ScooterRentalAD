@@ -11,6 +11,9 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    //historia wypożyczeń , wypozyczneie jednej hulajnogi w danym momencie na jednego uzytkownika ,
+    // cennik 2 zl za wypozyczneie oraz 2 zl za kazdy przejechany kilometr oraz jak długo hulajnoga w wypozyczeniu przez uzytkownika ?
+    // znizki  polegajace na historii uzytkownika na zasadzie (np.10 przejazd za darmo)
     private long id;
     private String name;
     private String lastName;

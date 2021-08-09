@@ -10,5 +10,7 @@ public interface ScooterRepository extends JpaRepository<Scooter, Long> {
 
     Optional<Scooter> findScooterByMarkOfScooter(ScooterDTO markOfScooter);
 
+    //NEW OPTIONAL THAT SHOWS SCOOTERS WITH BATTERY MORE THAN GOOD
+
     void deleteScooterByMarkOfScooter(String markOfScooter);
 }

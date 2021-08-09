@@ -21,19 +21,19 @@ public class UserController {
         return new ResponseEntity<>(allScooters, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     ResponseEntity<UserDTO> addNewUser(@RequestBody UserDTO userDTO) {
         UserDTO add = userService.add(userDTO);
         return new ResponseEntity<>(add, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/")
     ResponseEntity<UserDTO> updatedUser(@RequestBody UserDTO userDTO) {
         UserDTO update = userService.update(userDTO);
         return new ResponseEntity<>(update, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{mail}")
+    @DeleteMapping("/{mail}")
     ResponseEntity<?> deleteUser(@PathVariable("mail") String mail) {
         userService.deleteUserByMail(mail);
         return new ResponseEntity<>(HttpStatus.OK);

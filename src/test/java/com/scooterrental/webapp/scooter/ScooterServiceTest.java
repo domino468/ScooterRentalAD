@@ -18,7 +18,7 @@ class ScooterServiceTest {
     @Test
     public void shouldAddScooter(){
         //given
-        ScooterDTO scooter = new ScooterDTO("444","444","");
+        ScooterDTO scooter = new ScooterDTO("", "444",444,"");
         //when
         scooterService.add(scooter);
         //then
@@ -27,7 +27,7 @@ class ScooterServiceTest {
     @Test
     public void shouldShowAllScooters(){
         //given
-        ScooterDTO scooters = new ScooterDTO("","","");
+        ScooterDTO scooters = new ScooterDTO("", "",1,"");
         scooterService.add(scooters);
         //when
         List<ScooterDTO> allScooters = scooterService.findAllScooters();

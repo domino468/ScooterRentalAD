@@ -10,20 +10,30 @@ public class Scooter {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    //IDENTYFIKATOR BIZENSOWY (barcode)
+    //IDENTYFIKATOR BIZENSOWY (barcode) // done
+    private String barcode;
     private String markOfScooter;
-    //range zapisany za pomoca int
-    private String range;
-    //enum batterycondition
+    //range zapisany za pomoca int //done
+    private int range;
+    //enum inattention // inWork
     private  String batteryCondition ;
     public Scooter() {
     }
 
-    public Scooter(long id, String markOfScooter, String range, String batteryCondition) {
+    public Scooter(long id,String barcode, String markOfScooter, int range, String batteryCondition) {
         this.id = id;
+        this.barcode = barcode;
         this.markOfScooter = markOfScooter;
         this.range = range;
         this.batteryCondition = batteryCondition;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
     public long getId() {
@@ -42,11 +52,11 @@ public class Scooter {
         this.markOfScooter = markOfScooter;
     }
 
-    public String getRange() {
+    public int getRange() {
         return range;
     }
 
-    public void setRange(String range) {
+    public void setRange(int range) {
         this.range = range;
     }
 

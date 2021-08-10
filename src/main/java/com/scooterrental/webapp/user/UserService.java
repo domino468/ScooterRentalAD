@@ -1,5 +1,6 @@
 package com.scooterrental.webapp.user;
 
+import com.scooterrental.webapp.scooter.Scooter;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,7 +17,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    UserDTO add(UserDTO userDTO) {
+    public UserDTO add(UserDTO userDTO) {
         Optional<User> userByMail = userRepository
                 .findUserByMail(userDTO.getMail());
 
@@ -24,7 +25,7 @@ public class UserService {
         return convertUserToDTO(user);
     }
 
-    List<UserDTO> findAllUsers() {
+    public List<UserDTO> findAllUsers() {
         return userRepository.findAll()
                 .stream()
                 .map(this::convertUserToDTO)
@@ -32,13 +33,13 @@ public class UserService {
     }
 
     UserDTO update( UserDTO updatedUser) {
-        Optional<User> existingUser = userRepository
-                .findUserByMail(updatedUser.getMail());
-        User user = existingUser.orElseThrow(UserNotFoundException::new);
-        user.update(convertDTOToUser(updatedUser));
-        userRepository.save(user);
-        return convertUserToDTO(user);
+
+        User existingUser = new User();
+        existingUser.update(convertDTOToUser(updatedUser));
+        userRepository.save(existingUser);
+        return convertUserToDTO(existingUser);
     }
+
 
     void deleteUserByMail(String mail) {
         userRepository.deleteUserByMail(mail);

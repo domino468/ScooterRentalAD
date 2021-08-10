@@ -40,6 +40,7 @@ public class ScooterService {
 
     private ScooterDTO convertScooterToDTO(Scooter scooter) {
         return new ScooterDTO(
+                scooter.getBarcode(),
                 scooter.getMarkOfScooter(),
                 scooter.getRange(),
                 scooter.getBatteryCondition()
@@ -49,6 +50,7 @@ public class ScooterService {
 
     private Scooter convertDTOToScooter(ScooterDTO scooterDTO) {
         Scooter scooter = new Scooter();
+        scooter.setBarcode(scooterDTO.getBarcode());
         scooter.setMarkOfScooter(scooterDTO.getMarkOfScooter());
         scooter.setRange(scooterDTO.getRange());
         scooter.setBatteryCondition(scooterDTO.getBatteryCondition());

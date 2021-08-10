@@ -34,4 +34,29 @@ class ScooterServiceTest {
         //then
         assertThat(scooterService.findAllScooters()).contains(scooters);
     }
+    @Test
+    public void shouldDeleteScooter() {
+        //given
+        ScooterDTO scooter = new ScooterDTO("", "", "");
+        scooterService.add(scooter);
+        //when
+        scooterService.deleteScooterByMark(scooter.getMarkOfScooter());
+        //then
+        List<ScooterDTO> allScooters = scooterService.findAllScooters();
+        assertThat(allScooters).isEmpty();
+    }
+    //czemu nie chce dzialac?
+//    @Test
+//    public void shouldCheckIfScooterIsUpdated() {
+//        //given
+//        ScooterDTO scooter = new ScooterDTO("1", "1", "1");
+//        ScooterDTO newScooter = new ScooterDTO("2", "1", "1");
+//        scooterService.add(scooter);
+//        //when
+//        scooterService.update(scooter.getMarkOfScooter(newScooter.getMarkOfScooter(scooter)));
+//        //then
+//        List<ScooterDTO> allScooters = scooterService.findAllScooters();
+//        assertThat(allScooters).containsExactly(newScooter);
+//    }
+//
 }

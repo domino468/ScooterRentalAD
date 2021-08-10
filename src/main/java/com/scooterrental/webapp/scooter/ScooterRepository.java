@@ -8,7 +8,7 @@ import java.util.Optional;
 @Repository
 public interface ScooterRepository extends JpaRepository<Scooter, Long> {
 
-    Optional<Scooter> findScooterByMarkOfScooter(ScooterDTO markOfScooter);
+    Optional<Scooter> findScooterByMarkOfScooter(String markOfScooter);
 
     //NEW OPTIONAL THAT SHOWS SCOOTERS WITH BATTERY MORE THAN GOOD
 

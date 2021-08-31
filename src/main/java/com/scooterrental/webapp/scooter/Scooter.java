@@ -1,5 +1,7 @@
 package com.scooterrental.webapp.scooter;
 
+import rental.Station;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +17,10 @@ public class Scooter {
     private String markOfScooter;
     //range zapisany za pomoca int //done
     private int range;
-    //enum inattention // inWork
+    //enum batterycondition // inWork
     private  String batteryCondition ;
+    private Station station;
+
     public Scooter() {
     }
 
@@ -72,5 +76,9 @@ public class Scooter {
         this.markOfScooter = scooter.getMarkOfScooter();
         this.range = scooter.getRange();
         this.batteryCondition = scooter.getBatteryCondition();
+    }
+
+    public void setStation(Station station) {
+        this.station = station;
     }
 }

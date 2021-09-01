@@ -2,10 +2,8 @@ package rental;
 
 import com.scooterrental.webapp.scooter.Scooter;
 import com.scooterrental.webapp.scooter.ScooterService;
-import com.scooterrental.webapp.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 

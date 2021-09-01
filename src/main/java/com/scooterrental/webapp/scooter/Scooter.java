@@ -1,84 +1,87 @@
 package com.scooterrental.webapp.scooter;
 
-import rental.Station;
+import com.scooterrental.webapp.Station.Station;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Scooter {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    //IDENTYFIKATOR BIZENSOWY (barcode) // done
-    private String barcode;
-    private String markOfScooter;
-    //range zapisany za pomoca int //done
-    private int range;
-    //enum batterycondition // inWork
-    private  String batteryCondition ;
+    private String registrationNr;
+    private Integer constructionYear;
+    private Integer mileage;
+    private String model;
+    @ManyToOne
     private Station station;
+
+    public void setRegistrationNr(String registrationNr) {
+        this.registrationNr = registrationNr.strip();
+    }
+
+    public void setModel(String model) {
+        this.model = model.strip();
+    }
 
     public Scooter() {
     }
 
-    public Scooter(long id,String barcode, String markOfScooter, int range, String batteryCondition) {
-        this.id = id;
-        this.barcode = barcode;
-        this.markOfScooter = markOfScooter;
-        this.range = range;
-        this.batteryCondition = batteryCondition;
+    public Scooter(String registrationNr, Integer constructionYear, Integer mileage, String model, Station station) {
+        this.registrationNr = registrationNr;
+        this.constructionYear = constructionYear;
+        this.mileage = mileage;
+        this.model = model;
+        this.station = station;
     }
 
-    public String getBarcode() {
-        return barcode;
+    public String getRegistrationNr() {
+        return registrationNr;
     }
 
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
+    public Integer getConstructionYear() {
+        return constructionYear;
     }
 
-    public long getId() {
-        return id;
+    public void setConstructionYear(Integer constructionYear) {
+        this.constructionYear = constructionYear;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public Integer getMileage() {
+        return mileage;
     }
 
-    public String getMarkOfScooter() {
-        return markOfScooter;
+    public void setMileage(Integer mileage) {
+        this.mileage = mileage;
     }
 
-    public void setMarkOfScooter(String markOfScooter) {
-        this.markOfScooter = markOfScooter;
+    public String getModel() {
+        return model;
     }
 
-    public int getRange() {
-        return range;
-    }
-
-    public void setRange(int range) {
-        this.range = range;
-    }
-
-    public String getBatteryCondition() {
-        return batteryCondition;
-    }
-
-    public void setBatteryCondition(String batteryCondition) {
-        this.batteryCondition = batteryCondition;
-    }
-
-    void update(Scooter scooter) {
-        this.markOfScooter = scooter.getMarkOfScooter();
-        this.range = scooter.getRange();
-        this.batteryCondition = scooter.getBatteryCondition();
+    public Station getStation() {
+        return station;
     }
 
     public void setStation(Station station) {
         this.station = station;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Scooter scooter = (Scooter) o;
+        return Objects.equals(registrationNr, scooter.registrationNr) && Objects.equals(constructionYear, scooter.constructionYear) && Objects.equals(mileage, scooter.mileage) && Objects.equals(model, scooter.model) && Objects.equals(station, scooter.station);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(registrationNr, constructionYear, mileage, model, station);
+    }
+
+    @Override
+    public String toString() {
+        return "(" + registrationNr + ") " + model;
+    }
 }
+

@@ -6,71 +6,64 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    //historia wypożyczeń , wypozyczneie jednej hulajnogi w danym momencie na jednego uzytkownika ,
-    // cennik 2 zl za wypozyczneie oraz 2 zl za kazdy przejechany kilometr oraz jak długo hulajnoga w wypozyczeniu przez uzytkownika ?
-    // znizki  polegajace na historii uzytkownika na zasadzie (np.10 przejazd za darmo)
-    private long id;
-    private String name;
+    private Integer userNumber;
     private String lastName;
-    private String phoneNumber;
-    private String mail;
+    private String firstName;
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName.strip();
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName.strip();
+    }
 
     public User() {
     }
 
-    public User(long id, String name, String lastName, String phoneNumber, String mail) {
-        this.id = id;
-        this.name = name;
+    public User(Integer userNumber, String lastName, String firstName) {
+        this.userNumber = userNumber;
         this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.mail = mail;
+        this.firstName = firstName;
     }
 
-    public long getId() {
-        return id;
+    public Integer getUserNumber() {
+        return userNumber;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setUserNumber(Integer userNumber) {
+        this.userNumber = userNumber;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userNumber, user.userNumber) && Objects.equals(lastName, user.lastName) && Objects.equals(firstName, user.firstName);
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    @Override
+    public int hashCode() {
+        return Objects.hash(userNumber, lastName, firstName);
     }
 
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    void update(User user) {
-        this.name = user.getName();
-        this.lastName = user.getLastName();
-        this.phoneNumber = user.getPhoneNumber();
-        this.mail = user.getMail();
+    @Override
+    public String toString() {
+        return "(" + userNumber + ") " + lastName.toUpperCase() + ' ' + firstName;
     }
 }
+

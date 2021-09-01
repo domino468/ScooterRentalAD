@@ -1,9 +1,11 @@
 package rental;
 
+import com.scooterrental.webapp.Station.Station;
 import com.scooterrental.webapp.scooter.Scooter;
 import com.scooterrental.webapp.user.User;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -14,9 +16,13 @@ public class Rental implements Serializable {
     private LocalDate rentalDate;
     private LocalDate returnDate;
     private Integer km;
+    @ManyToOne
     private User driver;
+    @ManyToOne
     private Scooter scooter;
+    @ManyToOne
     private Station rentalStation;
+    @ManyToOne
     private Station returnStation;
 
     public Rental() {

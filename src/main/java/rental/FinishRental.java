@@ -1,5 +1,6 @@
 package rental;
 
+import com.scooterrental.webapp.Station.Station;
 import com.scooterrental.webapp.scooter.Scooter;
 import com.scooterrental.webapp.user.User;
 
@@ -94,17 +95,16 @@ public class FinishRental {
         this.km = km;
     }
 
-    @Override
-    public String toString() {
-        return "FinishRental{" +
-                "id=" + id +
-                ", rentalDate=" + rentalDate +
-                ", user=" + user +
-                ", scooter=" + scooter +
-                ", rentalStation=" + rentalStation +
-                ", returnDate=" + returnDate +
-                ", returnStation=" + returnStation +
-                ", km=" + km +
-                '}';
+    public static FinishRental fromRental(Rental rental) {
+        return new FinishRental(
+                rental.getId(),
+                rental.getRentalDate(),
+                rental.getDriver(),
+                rental.getScooter(),
+                rental.getRentalStation(),
+                LocalDate.now(),
+                null,
+                0
+        );
     }
 }

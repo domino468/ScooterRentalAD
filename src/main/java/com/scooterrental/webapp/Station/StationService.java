@@ -1,4 +1,4 @@
-package rental;
+package com.scooterrental.webapp.Station;
 
 import org.springframework.stereotype.Service;
 

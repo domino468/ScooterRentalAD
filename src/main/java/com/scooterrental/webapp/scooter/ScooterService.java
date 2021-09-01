@@ -1,59 +1,61 @@
 package com.scooterrental.webapp.scooter;
 
+import com.scooterrental.webapp.Station.Station;
+import com.scooterrental.webapp.Station.StationService;
+import com.scooterrental.webapp.util.MessagesBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import rental.RentalService;
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class ScooterService {
-    private final ScooterRepository scooterRepository;
+    @Autowired
+    private MessagesBean messages;
 
-    public ScooterService(ScooterRepository scooterRepository) {
-        this.scooterRepository = scooterRepository;
+    @Autowired
+    private ScooterRepository scooterRepository;
+
+    @Autowired
+    private StationService stationService;
+
+    @Autowired
+    private RentalService rentalService;
+
+
+    public List<Scooter> findByStation(Station station) {
+        return scooterRepository.findByStation(station);
     }
 
-    public ScooterDTO add(ScooterDTO scooterDTO) {
-        Scooter scooter = scooterRepository.save(convertDTOToScooter(scooterDTO));
-        return convertScooterToDTO(scooter);
+    public List<Scooter> findByMileageGreaterThan(Integer mileage) {
+        return scooterRepository.findByMileageGreaterThan(mileage);
     }
 
-    public List<ScooterDTO> findAllScooters() {
-        return scooterRepository.findAll()
-                .stream()
-                .map(this::convertScooterToDTO)
-                .collect(Collectors.toList());
+    public Scooter create(Scooter scooter) {
+        if (scooter.getStation() == null) {
+            throw new IllegalArgumentException(messages.get("carStationNotNull"));
+        }
+        if (scooter.getStation().getId() == null || !stationService.existsById(scooter.getStation().getId())) {
+            throw new EntityNotFoundException(messages.get("stationNotFound"));
+        }
+        if (scooterRepository.existsById(scooter.getRegistrationNr())) {
+            throw new EntityExistsException(messages.get("carAlreadyExists"));
+        }
+        return scooterRepository.save(scooter);
     }
 
-    ScooterDTO update(ScooterDTO updatedScooter) {
-
-        Scooter existingScooter = new Scooter();
-        existingScooter.update(convertDTOToScooter(updatedScooter));
-        scooterRepository.save(existingScooter);
-        return convertScooterToDTO(existingScooter);
+    public void deleteById(String registrationNr) {
+        Scooter scooter = scooterRepository.findById(registrationNr)
+                .orElseThrow(() -> new EntityNotFoundException(messages.get("carNotFound")));
+        if (!canDelete(scooter)) {
+            throw new IllegalArgumentException(messages.get("carDeleteError"));
+        }
+       scooterRepository.delete(scooter);
     }
 
-    void deleteScooterByMark(String markOfScooter) {
-        scooterRepository.deleteScooterByMarkOfScooter(markOfScooter);
-    }
 
-    private ScooterDTO convertScooterToDTO(Scooter scooter) {
-        return new ScooterDTO(
-                scooter.getBarcode(),
-                scooter.getMarkOfScooter(),
-                scooter.getRange(),
-                scooter.getBatteryCondition()
-
-        );
-    }
-
-    private Scooter convertDTOToScooter(ScooterDTO scooterDTO) {
-        Scooter scooter = new Scooter();
-        scooter.setBarcode(scooterDTO.getBarcode());
-        scooter.setMarkOfScooter(scooterDTO.getMarkOfScooter());
-        scooter.setRange(scooterDTO.getRange());
-        scooter.setBatteryCondition(scooterDTO.getBatteryCondition());
-        return scooter;
-
+    public boolean canDelete(Scooter scooter) {
+        return scooter.getStation() != null && rentalService.findByCar(scooter).isEmpty();
     }
 }

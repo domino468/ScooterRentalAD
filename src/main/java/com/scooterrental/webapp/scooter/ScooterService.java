@@ -34,22 +34,22 @@ public class ScooterService {
 
     public Scooter create(Scooter scooter) {
         if (scooter.getStation() == null) {
-            throw new IllegalArgumentException(messages.get("carStationNotNull"));
+            throw new IllegalArgumentException(messages.get("scooterStationNotNull"));
         }
         if (scooter.getStation().getId() == null || !stationService.existsById(scooter.getStation().getId())) {
             throw new EntityNotFoundException(messages.get("stationNotFound"));
         }
         if (scooterRepository.existsById(scooter.getRegistrationNr())) {
-            throw new EntityExistsException(messages.get("carAlreadyExists"));
+            throw new EntityExistsException(messages.get("scooterAlreadyExists"));
         }
         return scooterRepository.save(scooter);
     }
 
     public void deleteById(String registrationNr) {
         Scooter scooter = scooterRepository.findById(registrationNr)
-                .orElseThrow(() -> new EntityNotFoundException(messages.get("carNotFound")));
+                .orElseThrow(() -> new EntityNotFoundException(messages.get("scooterNotFound")));
         if (!canDelete(scooter)) {
-            throw new IllegalArgumentException(messages.get("carDeleteError"));
+            throw new IllegalArgumentException(messages.get("scooterDeleteError"));
         }
        scooterRepository.delete(scooter);
     }

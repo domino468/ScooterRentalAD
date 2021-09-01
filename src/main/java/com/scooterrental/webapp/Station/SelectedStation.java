@@ -1,10 +1,10 @@
 package com.scooterrental.webapp.Station;
 
-public class SelectedStationBean {
+public class SelectedStation {
 
     private Station station;
 
-    public SelectedStationBean() {
+    public SelectedStation() {
     }
 
     public Station getStation() {

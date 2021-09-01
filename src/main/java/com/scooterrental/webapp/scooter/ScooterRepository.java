@@ -1,18 +1,16 @@
 package com.scooterrental.webapp.scooter;
 
+import com.scooterrental.webapp.Station.Station;
+import com.scooterrental.webapp.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ScooterRepository extends JpaRepository<Scooter, Long> {
+public interface ScooterRepository extends JpaRepository<Scooter, String> {
+    List<Scooter> findByStation(Station station);
 
-    Optional<Scooter> findScooterByMarkOfScooter(String markOfScooter);
-
-    //NEW OPTIONAL THAT SHOWS SCOOTERS WITH BATTERY MORE THAN GOOD //done - now need to  make use in scooterService
-
-    Optional<Scooter> findScooterByBatteryCondition(String batteryCondition);
-
-    void deleteScooterByMarkOfScooter(String markOfScooter);
+    List<Scooter> findByMileageGreaterThan(Integer mileage);
 }

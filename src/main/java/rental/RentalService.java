@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Service
 public class RentalService {
+
     @Autowired
     private RentalRepository rentalRepository;
 
@@ -28,7 +29,6 @@ public class RentalService {
         rentalRepository.save(rental);
     }
 
-
     public void finish(Rental rental, FinishRental finishRental) {
         rental.setReturnStation(finishRental.getReturnStation());
         rental.setKm(finishRental.getKm());
@@ -37,7 +37,6 @@ public class RentalService {
 
         rentalRepository.save(rental);
     }
-
 
     public List<Rental> findRunningRentals() {
         return rentalRepository.findRunningRentals();
@@ -81,5 +80,4 @@ public class RentalService {
             return true;
         }
     }
-
 }

@@ -5,6 +5,7 @@ import com.scooterrental.webapp.Station.StationService;
 import com.scooterrental.webapp.util.MessagesBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rental.RentalRepository;
 import rental.RentalService;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
@@ -19,9 +20,6 @@ public class ScooterService {
 
     @Autowired
     private StationService stationService;
-
-    @Autowired
-    private RentalService rentalService;
 
 
     public List<Scooter> findByStation(Station station) {
@@ -45,17 +43,18 @@ public class ScooterService {
         return scooterRepository.save(scooter);
     }
 
-    public void deleteById(String registrationNr) {
-        Scooter scooter = scooterRepository.findById(registrationNr)
-                .orElseThrow(() -> new EntityNotFoundException(messages.get("scooterNotFound")));
-        if (!canDelete(scooter)) {
-            throw new IllegalArgumentException(messages.get("scooterDeleteError"));
-        }
-       scooterRepository.delete(scooter);
-    }
+//    public void deleteById(String registrationNr) {
+//        Scooter scooter = scooterRepository.findById(registrationNr)
+//                .orElseThrow(() -> new EntityNotFoundException(messages.get("scooterNotFound")));
+//        if (!canDelete(scooter)) {
+//            throw new IllegalArgumentException(messages.get("scooterDeleteError"));
+//        }
+//       scooterRepository.delete(scooter);
+//    }
 
 
-    public boolean canDelete(Scooter scooter) {
-        return scooter.getStation() != null && rentalService.findByCar(scooter).isEmpty();
-    }
+//    public boolean canDelete(Scooter scooter) {
+//        RentalRepository rentalService;
+//        return scooter.getStation() != null && rentalService.findByScooter(scooter).isEmpty();
+//    }
 }

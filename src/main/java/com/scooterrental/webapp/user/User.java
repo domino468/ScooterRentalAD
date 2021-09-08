@@ -1,10 +1,6 @@
 package com.scooterrental.webapp.user;
 
-import com.scooterrental.webapp.scooter.Scooter;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 

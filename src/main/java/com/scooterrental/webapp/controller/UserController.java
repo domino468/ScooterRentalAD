@@ -1,5 +1,4 @@
 package com.scooterrental.webapp.controller;
-
 import com.scooterrental.webapp.Station.SelectedStation;
 import com.scooterrental.webapp.Station.StationService;
 import com.scooterrental.webapp.scooter.ScooterService;
@@ -29,7 +28,7 @@ class PublicController {
 
     @PostMapping
     public String processForm(Model model,
-                              @Valid @ModelAttribute("selectedStationBean") SelectedStation selectedStationBean,
+                              @ModelAttribute("selectedStationBean") SelectedStation selectedStationBean,
                               BindingResult bindingResult) {
         model.addAttribute("stations", stationService.findAll());
         model.addAttribute("cars", bindingResult.hasErrors() ? null : scooterService.findByStation(selectedStationBean.getStation()));

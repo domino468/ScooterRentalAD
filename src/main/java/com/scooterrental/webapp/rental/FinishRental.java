@@ -1,4 +1,4 @@
-package rental;
+package com.scooterrental.webapp.rental;
 
 import com.scooterrental.webapp.Station.Station;
 import com.scooterrental.webapp.scooter.Scooter;
@@ -17,7 +17,7 @@ public class FinishRental {
     private Station returnStation;
     private Integer km;
 
-    public FinishRental() {
+    public FinishRental(Integer id, LocalDate rentalDate, String driver, Scooter scooter, Station rentalStation, LocalDate now, Object returnStation, int km) {
     }
 
     public FinishRental(Integer id, LocalDate rentalDate, User user, Scooter scooter, Station rentalStation, LocalDate returnDate, Station returnStation, Integer km) {

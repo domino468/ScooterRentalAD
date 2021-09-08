@@ -1,17 +1,18 @@
-package rental;
+package com.scooterrental.webapp.rental;
 
 import com.scooterrental.webapp.Station.Station;
 import com.scooterrental.webapp.scooter.Scooter;
 import com.scooterrental.webapp.user.User;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 public class Rental implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private  Integer id;
     private LocalDate rentalDate;
     private LocalDate returnDate;

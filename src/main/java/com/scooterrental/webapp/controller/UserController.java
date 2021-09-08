@@ -26,12 +26,12 @@ class PublicController {
         return "fragments/search-rentals";
     }
 
-    @PostMapping
-    public String processForm(Model model,
-                              @ModelAttribute("selectedStationBean") SelectedStation selectedStationBean,
-                              BindingResult bindingResult) {
-        model.addAttribute("stations", stationService.findAll());
-        model.addAttribute("cars", bindingResult.hasErrors() ? null : scooterService.findByStation(selectedStationBean.getStation()));
-        return "fragments/search-rentals";
-    }
+//    @PostMapping
+//    public String processForm(Model model,
+//                              @ModelAttribute("selectedStationBean") SelectedStation selectedStationBean,
+//                              BindingResult bindingResult) {
+//        model.addAttribute("stations", stationService.findAll());
+////        model.addAttribute("cars", bindingResult.hasErrors() ? null : scooterService.findByStation(selectedStationBean.getStation()));
+//        return "fragments/search-rentals";
+//    }
 }

@@ -1,4 +1,4 @@
-package rental;
+package com.scooterrental.webapp.rental;
 
 import com.scooterrental.webapp.scooter.Scooter;
 import com.scooterrental.webapp.scooter.ScooterService;
@@ -21,16 +21,16 @@ public class RentalService {
         rental.setId(null);
         rental.setKm(null);
         rental.setReturnDate(null);
-        rental.setReturnStation(null);
-        rental.getScooter().setStation(null);
+//        rental.setReturnStation(null);
+//        rental.getScooter().setStation(null);
 
         rentalRepository.save(rental);
     }
 
     public void finish(Rental rental, FinishRental finishRental) {
-        rental.setReturnStation(finishRental.getReturnStation());
+//        rental.setReturnStation(finishRental.getReturnStation());
         rental.setKm(finishRental.getKm());
-        rental.getScooter().setStation(rental.getReturnStation());
+//        rental.getScooter().setStation(rental.getReturnStation());
         rental.getScooter().setMileage(rental.getScooter().getMileage() + rental.getKm());
 
         rentalRepository.save(rental);
@@ -61,13 +61,13 @@ public class RentalService {
 
 
     public boolean canFinish(Rental rental) {
-        return rental.getReturnDate() == null && rental.getKm() == null && rental.getReturnStation() == null;
+        return rental.getReturnDate() == null && rental.getKm() == null ;
     }
 
 
-    public boolean canCreate(Rental rental) {
-        return scooterService.findByStation(rental.getRentalStation()).contains(rental.getScooter());
-    }
+//    public boolean canCreate(Rental rental) {
+//        return scooterService.findByStation(rental.getRentalStation()).contains(rental.getScooter());
+//    }
 
 
     public boolean cleanDates(Rental rental, FinishRental finishRental) {

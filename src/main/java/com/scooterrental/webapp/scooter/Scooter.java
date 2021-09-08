@@ -13,7 +13,7 @@ public class Scooter {
     private Integer mileage;
     private String model;
     @ManyToOne
-    private Station station;
+//    private Station station;
 
     public void setRegistrationNr(String registrationNr) {
         this.registrationNr = registrationNr.strip();
@@ -31,7 +31,7 @@ public class Scooter {
         this.constructionYear = constructionYear;
         this.mileage = mileage;
         this.model = model;
-        this.station = station;
+//        this.station = station;
     }
 
     public String getRegistrationNr() {
@@ -58,25 +58,25 @@ public class Scooter {
         return model;
     }
 
-    public Station getStation() {
-        return station;
-    }
-
-    public void setStation(Station station) {
-        this.station = station;
-    }
+//    public Station getStation() {
+//        return station;
+//    }
+//
+//    public void setStation(Station station) {
+//        this.station = station;
+//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Scooter scooter = (Scooter) o;
-        return Objects.equals(registrationNr, scooter.registrationNr) && Objects.equals(constructionYear, scooter.constructionYear) && Objects.equals(mileage, scooter.mileage) && Objects.equals(model, scooter.model) && Objects.equals(station, scooter.station);
+        return Objects.equals(registrationNr, scooter.registrationNr) && Objects.equals(constructionYear, scooter.constructionYear) && Objects.equals(mileage, scooter.mileage) && Objects.equals(model, scooter.model);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(registrationNr, constructionYear, mileage, model, station);
+        return Objects.hash(registrationNr, constructionYear, mileage, model);
     }
 
     @Override

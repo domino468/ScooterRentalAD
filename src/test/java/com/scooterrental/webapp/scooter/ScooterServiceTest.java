@@ -35,11 +35,29 @@ class ScooterServiceTest {
     void shouldShowAllScooters(){
         //given
         Scooter scooter = new Scooter();
+        scooter.setConstructionYear(2021);
+        scooter.setMileage(1);
+        scooter.setRegistrationNr("1");
+        scooter.setModel("222");
         scooterService.create(scooter);
         //when
         List<Scooter> allScooters = scooterService.showAllScooters();
         //then
         assertThat(allScooters).contains(scooter);
+    }
+    @Test
+    void shouldDeleteScooter(){
+        //given
+        Scooter scooter = new Scooter();
+        scooter.setConstructionYear(2021);
+        scooter.setMileage(1);
+        scooter.setRegistrationNr("1");
+        scooter.setModel("222");
+        //when
+        scooterService.deleteByRegistrationNr(scooter.getRegistrationNr());
+        //then
+        List<Scooter> allScooters = scooterService.showAllScooters();
+        assertThat(allScooters.isEmpty());
     }
 
 }

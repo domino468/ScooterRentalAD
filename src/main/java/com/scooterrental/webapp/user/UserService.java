@@ -2,7 +2,6 @@ package com.scooterrental.webapp.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityExistsException;
 import java.util.List;
 
 public class UserService {
@@ -14,10 +13,10 @@ public class UserService {
     }
 
 
-    public User create(User user) {
+    public void create(User user) {
         if (userRepository.existsById(user.getUserNumber())) {
         }
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public boolean existsById(Integer id) {

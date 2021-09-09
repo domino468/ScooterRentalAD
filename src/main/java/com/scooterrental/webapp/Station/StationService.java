@@ -12,7 +12,7 @@ public class StationService {
         return stationRepository.findAll();
     }
 
-    public boolean existsById(Integer id) {
-        return stationRepository.existsById(id);
+    public boolean existsById(String id) {
+        return stationRepository.existsById(Integer.valueOf(id));
     }
 }

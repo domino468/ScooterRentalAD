@@ -12,8 +12,7 @@ public class Scooter {
     private Integer constructionYear;
     private Integer mileage;
     private String model;
-    @ManyToOne
-//    private Station station;
+    private String location;
 
     public void setRegistrationNr(String registrationNr) {
         this.registrationNr = registrationNr.strip();
@@ -26,12 +25,12 @@ public class Scooter {
     public Scooter() {
     }
 
-    public Scooter(String registrationNr, Integer constructionYear, Integer mileage, String model, Station station) {
+    public Scooter(String registrationNr, Integer constructionYear, Integer mileage, String model, Station station,String location)  {
         this.registrationNr = registrationNr;
         this.constructionYear = constructionYear;
         this.mileage = mileage;
         this.model = model;
-//        this.station = station;
+        this.location = location;
     }
 
     public String getRegistrationNr() {
@@ -58,6 +57,13 @@ public class Scooter {
         return model;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 //    public Station getStation() {
 //        return station;
 //    }
@@ -65,18 +71,24 @@ public class Scooter {
 //    public void setStation(Station station) {
 //        this.station = station;
 //    }
-
+    void update(Scooter scooter){
+        this.registrationNr = scooter.getRegistrationNr();
+        this.constructionYear = scooter.getConstructionYear();
+        this.mileage = scooter.getMileage();
+        this.model = scooter.getModel();
+        this.location = scooter.getLocation();
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Scooter scooter = (Scooter) o;
-        return Objects.equals(registrationNr, scooter.registrationNr) && Objects.equals(constructionYear, scooter.constructionYear) && Objects.equals(mileage, scooter.mileage) && Objects.equals(model, scooter.model);
+        return Objects.equals(registrationNr, scooter.registrationNr) && Objects.equals(constructionYear, scooter.constructionYear) && Objects.equals(mileage, scooter.mileage) && Objects.equals(model, scooter.model) && Objects.equals(location,scooter.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(registrationNr, constructionYear, mileage, model);
+        return Objects.hash(registrationNr, constructionYear, mileage, model,location);
     }
 
     @Override

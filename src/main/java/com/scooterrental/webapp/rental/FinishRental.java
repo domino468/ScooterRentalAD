@@ -101,7 +101,7 @@ public class FinishRental {
                 rental.getRentalDate(),
                 rental.getDriver(),
                 rental.getScooter(),
-                rental.getRentalStation(),
+                rental.getStartLocation(),
                 LocalDate.now(),
                 null,
                 0

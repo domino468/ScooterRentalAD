@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ScooterService {
@@ -47,5 +46,9 @@ public class ScooterService {
 
     void deleteByRegistrationNr(String registrationNr) {
         scooterRepository.deleteByRegistrationNr(registrationNr);
+    }
+
+    public List<Scooter> findByLocation(String location){
+        return  scooterRepository.findByLocation(location);
     }
 }

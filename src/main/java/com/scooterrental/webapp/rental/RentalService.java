@@ -38,7 +38,7 @@ public class RentalService {
     }
 
 
-    public List<Rental> findByCar(Scooter scooter) {
+    public List<Rental> findByScooter(Scooter scooter) {
         return rentalRepository.findByScooter(scooter);
     }
 
@@ -58,7 +58,7 @@ public class RentalService {
 
 
     public boolean canFinish(Rental rental) {
-        return rental.getReturnDate() == null && rental.getKm() == null;
+        return rental.getReturnDate() == null && rental.getKm() == null && rental.getEndLocation() == null;
     }
 
 

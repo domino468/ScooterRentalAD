@@ -22,22 +22,22 @@ public class Rental implements Serializable {
     @ManyToOne
     private Scooter scooter;
     @ManyToOne
-    private String rentalStation;
+    private String startLocation;
     @ManyToOne
-    private String returnStation;
+    private String endLocation;
 
     public Rental() {
     }
 
-    public Rental(Integer id, LocalDate rentalDate, LocalDate returnDate, Integer km, User driver, Scooter scooter, String rentalStation, String returnStation) {
+    public Rental(Integer id, LocalDate rentalDate, LocalDate returnDate, Integer km, User driver, Scooter scooter, String startLocation, String endLocation) {
         this.id = id;
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
         this.km = km;
         this.driver = driver;
         this.scooter = scooter;
-        this.rentalStation = rentalStation;
-        this.returnStation = returnStation;
+        this.startLocation = startLocation;
+        this.endLocation = endLocation;
     }
 
     public Integer getId() {
@@ -88,20 +88,20 @@ public class Rental implements Serializable {
         this.scooter = scooter;
     }
 
-    public String getRentalStation() {
-        return rentalStation;
+    public String getStartLocation() {
+        return startLocation;
     }
 
-    public void setRentalStation(String rentalStation) {
-        this.rentalStation = rentalStation;
+    public void setStartLocation(String startLocation) {
+        this.startLocation = startLocation;
     }
 
-    public String getReturnStation() {
-        return returnStation;
+    public String getEndLocation() {
+        return endLocation;
     }
 
-    public void setReturnStation(String returnStation) {
-        this.returnStation = returnStation;
+    public void setEndLocation(String endLocation) {
+        this.endLocation = endLocation;
     }
 
     @Override
@@ -113,8 +113,8 @@ public class Rental implements Serializable {
                 ", km=" + km +
                 ", driver=" + driver +
                 ", scooter=" + scooter +
-                ", rentalStation=" + rentalStation +
-                ", returnStation=" + returnStation +
+                ", rentalStation=" + startLocation +
+                ", returnStation=" + endLocation +
                 '}';
     }
 
@@ -123,11 +123,11 @@ public class Rental implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rental rental = (Rental) o;
-        return Objects.equals(id, rental.id) && Objects.equals(rentalDate, rental.rentalDate) && Objects.equals(returnDate, rental.returnDate) && Objects.equals(km, rental.km) && Objects.equals(driver, rental.driver) && Objects.equals(scooter, rental.scooter) && Objects.equals(rentalStation, rental.rentalStation) && Objects.equals(returnStation, rental.returnStation);
+        return Objects.equals(id, rental.id) && Objects.equals(rentalDate, rental.rentalDate) && Objects.equals(returnDate, rental.returnDate) && Objects.equals(km, rental.km) && Objects.equals(driver, rental.driver) && Objects.equals(scooter, rental.scooter) && Objects.equals(startLocation, rental.startLocation) && Objects.equals(endLocation, rental.endLocation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, rentalDate, returnDate, km, driver, scooter, rentalStation, returnStation);
+        return Objects.hash(id, rentalDate, returnDate, km, driver, scooter, startLocation, endLocation);
     }
 }

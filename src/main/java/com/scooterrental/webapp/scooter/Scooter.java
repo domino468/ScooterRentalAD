@@ -1,6 +1,6 @@
 package com.scooterrental.webapp.scooter;
 
-import com.scooterrental.webapp.Station.Station;
+import com.scooterrental.webapp.Station.String;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -8,24 +8,24 @@ import java.util.Objects;
 @Entity
 public class Scooter {
     @Id
-    private String registrationNr;
+    private java.lang.String registrationNr;
     private Integer constructionYear;
     private Integer mileage;
-    private String model;
-    private String location;
+    private java.lang.String model;
+    private java.lang.String location;
 
-    public void setRegistrationNr(String registrationNr) {
+    public void setRegistrationNr(java.lang.String registrationNr) {
         this.registrationNr = registrationNr.strip();
     }
 
-    public void setModel(String model) {
+    public void setModel(java.lang.String model) {
         this.model = model.strip();
     }
 
     public Scooter() {
     }
 
-    public Scooter(String registrationNr, Integer constructionYear, Integer mileage, String model, Station station,String location)  {
+    public Scooter(java.lang.String registrationNr, Integer constructionYear, Integer mileage, java.lang.String model, String station, java.lang.String location)  {
         this.registrationNr = registrationNr;
         this.constructionYear = constructionYear;
         this.mileage = mileage;
@@ -33,7 +33,7 @@ public class Scooter {
         this.location = location;
     }
 
-    public String getRegistrationNr() {
+    public java.lang.String getRegistrationNr() {
         return registrationNr;
     }
 
@@ -53,15 +53,15 @@ public class Scooter {
         this.mileage = mileage;
     }
 
-    public String getModel() {
+    public java.lang.String getModel() {
         return model;
     }
 
-    public String getLocation() {
+    public java.lang.String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(java.lang.String location) {
         this.location = location;
     }
 
@@ -86,7 +86,7 @@ public class Scooter {
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return "(" + registrationNr + ") " + model;
     }
 }

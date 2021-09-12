@@ -7,9 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @Transactional
 class ScooterServiceTest {
@@ -17,7 +19,7 @@ class ScooterServiceTest {
     private ScooterService scooterService;
 
     @Test
-    void shouldAddScooter(){
+    void shouldAddScooter() {
         //given
         Scooter scooter = new Scooter();
         scooter.setConstructionYear(2021);
@@ -27,12 +29,13 @@ class ScooterServiceTest {
         //when
         scooterService.createScooter(scooter);
         //then
-        List<Scooter> byRegistrationNr = scooterService.findByRegistrationNr("1");
+        Optional<Scooter> byRegistrationNr = scooterService.findByRegistrationNr("1");
         assertThat(byRegistrationNr).isNotEmpty();
 
     }
+
     @Test
-    void shouldShowAllScooters(){
+    void shouldShowAllScooters() {
         //given
         Scooter scooter = new Scooter();
         scooter.setConstructionYear(2021);
@@ -41,12 +44,13 @@ class ScooterServiceTest {
         scooter.setModel("222");
         scooterService.createScooter(scooter);
         //when
-        List<Scooter> allScooters = scooterService.showAllScooters();
+        List<Scooter> allScooters = scooterService.findAllScooters();
         //then
         assertThat(allScooters).contains(scooter);
     }
+
     @Test
-    void shouldDeleteScooter(){
+    void shouldDeleteScooter() {
         //given
         Scooter scooter = new Scooter();
         scooter.setConstructionYear(2021);
@@ -56,8 +60,29 @@ class ScooterServiceTest {
         //when
         scooterService.deleteByRegistrationNr(scooter.getRegistrationNr());
         //then
-        List<Scooter> allScooters = scooterService.showAllScooters();
+        List<Scooter> allScooters = scooterService.findAllScooters();
         assertThat(allScooters.isEmpty());
     }
+
+//    @Test
+//    void shouldCheckIfScooterIsUpdated() {
+//        //given
+//        Scooter scooter = new Scooter();
+//        scooter.setConstructionYear(2020);
+//        scooter.setMileage(1);
+//        scooter.setRegistrationNr("1");
+//        scooter.setModel("222");
+//        Scooter newScooter = new Scooter();
+//        scooter.setConstructionYear(2021);
+//        scooter.setMileage(1);
+//        scooter.setRegistrationNr("");
+//        scooter.setModel("232");
+//        scooterService.createScooter(scooter);
+//        //when
+//        scooterService.update(scooter.getRegistrationNr(), newScooter);
+//        //then
+//        List<Scooter> allScooters = scooterService.findAllScooters();
+//        assertThat(allScooters).containsExactly(newScooter);
+//    }
 
 }

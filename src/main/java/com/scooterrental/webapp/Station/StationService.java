@@ -8,11 +8,11 @@ import java.util.List;
 public class StationService {
     private StationRepository stationRepository;
 
-    public List<Station> findAll() {
+    public List<String> findAll() {
         return stationRepository.findAll();
     }
 
-    public boolean existsById(String id) {
+    public boolean existsById(java.lang.String id) {
         return stationRepository.existsById(Integer.valueOf(id));
     }
 }

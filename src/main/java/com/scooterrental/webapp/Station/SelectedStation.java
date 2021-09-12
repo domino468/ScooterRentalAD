@@ -2,16 +2,16 @@ package com.scooterrental.webapp.Station;
 
 public class SelectedStation {
 
-    private Station station;
+    private String station;
 
     public SelectedStation() {
     }
 
-    public Station getStation() {
+    public String getStation() {
         return station;
     }
 
-    public void setStation(Station station) {
+    public void setStation(String station) {
         this.station = station;
     }
 }

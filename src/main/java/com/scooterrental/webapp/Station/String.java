@@ -7,16 +7,16 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Station {
+public class String {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String city;
+    private java.lang.String city;
 
-    public Station() {
+    public String() {
     }
 
-    public Station(Integer id, String city) {
+    public String(Integer id, java.lang.String city) {
         this.id = id;
         this.city = city;
     }
@@ -29,16 +29,16 @@ public class Station {
         this.id = id;
     }
 
-    public String getCity() {
+    public java.lang.String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(java.lang.String city) {
         this.city = city;
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return "Station{" +
                 "id=" + id +
                 ", city='" + city + '\'' +
@@ -49,7 +49,7 @@ public class Station {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Station station = (Station) o;
+        String station = (String) o;
         return Objects.equals(id, station.id) && Objects.equals(city, station.city);
     }
 

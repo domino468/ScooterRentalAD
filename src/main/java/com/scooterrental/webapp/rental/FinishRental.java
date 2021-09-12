@@ -1,6 +1,6 @@
 package com.scooterrental.webapp.rental;
 
-import com.scooterrental.webapp.Station.Station;
+import com.scooterrental.webapp.Station.String;
 import com.scooterrental.webapp.scooter.Scooter;
 import com.scooterrental.webapp.user.User;
 
@@ -12,22 +12,22 @@ public class FinishRental {
     private LocalDate rentalDate;
     private User user;
     private Scooter scooter;
-    private Station rentalStation;
+    private String startLocation;
+    private String endLocation;
     private LocalDate returnDate;
-    private Station returnStation;
     private Integer km;
 
-    public FinishRental(Integer id, LocalDate rentalDate, String driver, Scooter scooter, Station rentalStation, LocalDate now, Object returnStation, int km) {
+    public FinishRental(Integer id, LocalDate rentalDate, java.lang.String driver, Scooter scooter, String rentalStation, LocalDate now, Object returnStation, int km) {
     }
 
-    public FinishRental(Integer id, LocalDate rentalDate, User user, Scooter scooter, Station rentalStation, LocalDate returnDate, Station returnStation, Integer km) {
+    public FinishRental(Integer id, LocalDate rentalDate, User user, Scooter scooter, String startLocation, LocalDate returnDate, String endLocation, Integer km) {
         this.id = id;
         this.rentalDate = rentalDate;
         this.user = user;
         this.scooter = scooter;
-        this.rentalStation = rentalStation;
+        this.startLocation = startLocation;
         this.returnDate = returnDate;
-        this.returnStation = returnStation;
+        this.endLocation = endLocation;
         this.km = km;
     }
 
@@ -63,12 +63,12 @@ public class FinishRental {
         this.scooter = scooter;
     }
 
-    public Station getRentalStation() {
-        return rentalStation;
+    public String getStartLocation() {
+        return startLocation;
     }
 
-    public void setRentalStation(Station rentalStation) {
-        this.rentalStation = rentalStation;
+    public void setStartLocation(String startLocation) {
+        this.startLocation = startLocation;
     }
 
     public LocalDate getReturnDate() {
@@ -79,12 +79,12 @@ public class FinishRental {
         this.returnDate = returnDate;
     }
 
-    public Station getReturnStation() {
-        return returnStation;
+    public String getEndLocation() {
+        return endLocation;
     }
 
-    public void setReturnStation(Station returnStation) {
-        this.returnStation = returnStation;
+    public void setEndLocation(String endLocation) {
+        this.endLocation = endLocation;
     }
 
     public Integer getKm() {

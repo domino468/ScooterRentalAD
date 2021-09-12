@@ -13,9 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 public class UserServiceTest {
     @Autowired
-    private  UserService userService;
+    private UserService userService;
+
     @Test
-    void shouldAddUser(){
+    void shouldAddUser() {
         //given
         User user = new User();
         user.setUserNumber("1");
@@ -27,5 +28,34 @@ public class UserServiceTest {
         List<User> byFirstName = userService.findByFirstName("adam");
         assertThat(byFirstName).isNotEmpty();
 
+    }
+
+    @Test
+    void shouldShowAllUsers() {
+        //given
+        User user = new User();
+        user.setUserNumber("1");
+        user.setFirstName("adam");
+        user.setLastName("dominik");
+        userService.create(user);
+        //when
+        List<User> showALlUsers = userService.findAllUsers();
+        //then
+        assertThat(showALlUsers).contains(user);
+    }
+
+    @Test
+    void shouldDeleteUser() {
+        //given
+        User user = new User();
+        user.setUserNumber("1");
+        user.setFirstName("adam");
+        user.setLastName("dominik");
+        userService.create(user);
+        //when
+        userService.deleteByFirstName(user.getFirstName());
+        //then
+        List<User> allUsers = userService.findAllUsers();
+        assertThat(allUsers).isEmpty();
     }
 }

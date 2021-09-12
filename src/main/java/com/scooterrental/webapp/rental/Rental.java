@@ -1,6 +1,6 @@
 package com.scooterrental.webapp.rental;
 
-import com.scooterrental.webapp.Station.Station;
+import com.scooterrental.webapp.Station.String;
 import com.scooterrental.webapp.scooter.Scooter;
 import com.scooterrental.webapp.user.User;
 
@@ -22,14 +22,14 @@ public class Rental implements Serializable {
     @ManyToOne
     private Scooter scooter;
     @ManyToOne
-    private Station rentalStation;
+    private String rentalStation;
     @ManyToOne
-    private Station returnStation;
+    private String returnStation;
 
     public Rental() {
     }
 
-    public Rental(Integer id, LocalDate rentalDate, LocalDate returnDate, Integer km, User driver, Scooter scooter, Station rentalStation, Station returnStation) {
+    public Rental(Integer id, LocalDate rentalDate, LocalDate returnDate, Integer km, User driver, Scooter scooter, String rentalStation, String returnStation) {
         this.id = id;
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
@@ -88,24 +88,24 @@ public class Rental implements Serializable {
         this.scooter = scooter;
     }
 
-    public Station getRentalStation() {
+    public String getRentalStation() {
         return rentalStation;
     }
 
-    public void setRentalStation(Station rentalStation) {
+    public void setRentalStation(String rentalStation) {
         this.rentalStation = rentalStation;
     }
 
-    public Station getReturnStation() {
+    public String getReturnStation() {
         return returnStation;
     }
 
-    public void setReturnStation(Station returnStation) {
+    public void setReturnStation(String returnStation) {
         this.returnStation = returnStation;
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return "Rental{" +
                 "id=" + id +
                 ", rentalDate=" + rentalDate +

@@ -5,11 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import javax.xml.stream.Location;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface ScooterRepository extends JpaRepository<Scooter, String> {
+public interface ScooterRepository extends JpaRepository<Scooter, Long> {
 //    List<Scooter> findByLocation(Location location);
-    List<Scooter> findByRegistrationNr(String registrationNr);
+    Optional<Scooter> findByRegistrationNr(String registrationNr);
     List<Scooter> findByMileageGreaterThan(Integer mileage);
     void deleteByRegistrationNr(String registrationNr);
 }

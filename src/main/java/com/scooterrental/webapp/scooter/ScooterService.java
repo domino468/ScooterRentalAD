@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,8 +20,7 @@ public class ScooterService {
     @Autowired
     private StationService stationService;
 
-
-    public List<Scooter> findByRegistrationNr(String registrationNr) {
+    public Optional<Scooter> findByRegistrationNr(String registrationNr) {
         return scooterRepository.findByRegistrationNr(registrationNr);
     }
 
@@ -28,17 +28,21 @@ public class ScooterService {
         return scooterRepository.findByMileageGreaterThan(mileage);
     }
 
-    List<Scooter> showAllScooters() {
-        return scooterRepository.findAll()
-                .stream()
-                .map(this::createScooter)
-                .collect(Collectors.toList());
+    List<Scooter> findAllScooters() {
+        return scooterRepository.findAll();
+
     }
 
     public Scooter createScooter(Scooter scooter) {
-
-
         return scooterRepository.save(scooter);
+    }
+    Scooter update(String registrationNr, Scooter updatedScooter) {
+        Optional<Scooter> optionalScooter = scooterRepository
+                .findByRegistrationNr((registrationNr));
+        Scooter existingScooter = optionalScooter.orElseThrow(ScooterNotFoundException::new);
+        existingScooter.update((updatedScooter));
+        scooterRepository.save(existingScooter);
+        return (existingScooter);
     }
 
     void deleteByRegistrationNr(String registrationNr) {

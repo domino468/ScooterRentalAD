@@ -1,9 +1,11 @@
 package com.scooterrental.webapp.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class UserService {
     @Autowired
     private UserRepository userRepository;
@@ -14,12 +16,12 @@ public class UserService {
 
 
     public void create(User user) {
-        if (userRepository.existsById(user.getUserNumber())) {
-        }
+
         userRepository.save(user);
     }
 
-    public boolean existsById(Integer id) {
-        return userRepository.existsById(id);
+
+    public List<User> findByFirstName(String firstName) {
+        return userRepository.findByFirstName(firstName);
     }
 }

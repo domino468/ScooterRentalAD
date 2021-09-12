@@ -64,13 +64,7 @@ public class Scooter {
     public void setLocation(String location) {
         this.location = location;
     }
-//    public Station getStation() {
-//        return station;
-//    }
-//
-//    public void setStation(Station station) {
-//        this.station = station;
-//    }
+
     void update(Scooter scooter){
         this.registrationNr = scooter.getRegistrationNr();
         this.constructionYear = scooter.getConstructionYear();

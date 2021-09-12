@@ -1,13 +1,15 @@
 package com.scooterrental.webapp.user;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 public class User {
     @Id
-    private Integer userNumber;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    @Column(unique = true)
+    private String userNumber;
     private String lastName;
     private String firstName;
 
@@ -22,17 +24,18 @@ public class User {
     public User() {
     }
 
-    public User(Integer userNumber, String lastName, String firstName) {
+    public User(long id, String userNumber, String lastName, String firstName) {
+        this.id = id;
         this.userNumber = userNumber;
         this.lastName = lastName;
         this.firstName = firstName;
     }
 
-    public Integer getUserNumber() {
+    public String getUserNumber() {
         return userNumber;
     }
 
-    public void setUserNumber(Integer userNumber) {
+    public void setUserNumber(String userNumber) {
         this.userNumber = userNumber;
     }
 
@@ -49,17 +52,22 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(userNumber, user.userNumber) && Objects.equals(lastName, user.lastName) && Objects.equals(firstName, user.firstName);
+        return id == user.id && Objects.equals(userNumber, user.userNumber) && Objects.equals(lastName, user.lastName) && Objects.equals(firstName, user.firstName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userNumber, lastName, firstName);
+        return Objects.hash(id, userNumber, lastName, firstName);
     }
 
     @Override
     public String toString() {
-        return "(" + userNumber + ") " + lastName.toUpperCase() + ' ' + firstName;
+        return "User{" +
+                "id=" + id +
+                ", userNumber='" + userNumber + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                '}';
     }
 }
 

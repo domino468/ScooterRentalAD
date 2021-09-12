@@ -25,7 +25,7 @@ class ScooterServiceTest {
         scooter.setRegistrationNr("1");
         scooter.setModel("222");
         //when
-        scooterService.create(scooter);
+        scooterService.createScooter(scooter);
         //then
         List<Scooter> byRegistrationNr = scooterService.findByRegistrationNr("1");
         assertThat(byRegistrationNr).isNotEmpty();
@@ -39,7 +39,7 @@ class ScooterServiceTest {
         scooter.setMileage(1);
         scooter.setRegistrationNr("1");
         scooter.setModel("222");
-        scooterService.create(scooter);
+        scooterService.createScooter(scooter);
         //when
         List<Scooter> allScooters = scooterService.showAllScooters();
         //then

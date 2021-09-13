@@ -10,8 +10,13 @@ import java.util.Optional;
 @Repository
 public interface ScooterRepository extends JpaRepository<Scooter, Long> {
     List<Scooter> findByLocation(String location);
+
     Optional<Scooter> findByRegistrationNr(String registrationNr);
+
     List<Scooter> findByMileageGreaterThan(Integer mileage);
+
     void deleteByRegistrationNr(String registrationNr);
+
+    void storeScooter(Scooter scooter);
 
 }

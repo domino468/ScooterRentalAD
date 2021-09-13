@@ -5,6 +5,7 @@ import com.scooterrental.webapp.util.MessagesBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.stream.Location;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,4 +52,8 @@ public class ScooterService {
     public List<Scooter> findByLocation(String location){
         return  scooterRepository.findByLocation(location);
     }
+
+
+
+
 }

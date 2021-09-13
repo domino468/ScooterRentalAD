@@ -13,6 +13,7 @@ public class Scooter {
     private Integer mileage;
     private java.lang.String model;
     private java.lang.String location;
+    private Integer price;
 
     public void setRegistrationNr(java.lang.String registrationNr) {
         this.registrationNr = registrationNr.strip();
@@ -25,13 +26,18 @@ public class Scooter {
     public Scooter() {
     }
 
-    public Scooter(java.lang.String registrationNr, Integer constructionYear, Integer mileage, java.lang.String model, String station, java.lang.String location)  {
+    public Scooter(java.lang.String registrationNr, Integer constructionYear, Integer mileage, java.lang.String model, java.lang.String location, Integer price) {
         this.registrationNr = registrationNr;
         this.constructionYear = constructionYear;
         this.mileage = mileage;
         this.model = model;
         this.location = location;
+        this.price = price;
     }
+
+    public Integer getPrice() { return price; }
+
+    public void setPrice(Integer price) { this.price = price; }
 
     public java.lang.String getRegistrationNr() {
         return registrationNr;
@@ -53,9 +59,7 @@ public class Scooter {
         this.mileage = mileage;
     }
 
-    public java.lang.String getModel() {
-        return model;
-    }
+    public java.lang.String getModel() { return model; }
 
     public java.lang.String getLocation() {
         return location;
@@ -65,24 +69,26 @@ public class Scooter {
         this.location = location;
     }
 
-    void update(Scooter scooter){
+    void update(Scooter scooter) {
         this.registrationNr = scooter.getRegistrationNr();
         this.constructionYear = scooter.getConstructionYear();
         this.mileage = scooter.getMileage();
         this.model = scooter.getModel();
         this.location = scooter.getLocation();
+        this.price = scooter.getPrice();
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Scooter scooter = (Scooter) o;
-        return Objects.equals(registrationNr, scooter.registrationNr) && Objects.equals(constructionYear, scooter.constructionYear) && Objects.equals(mileage, scooter.mileage) && Objects.equals(model, scooter.model) && Objects.equals(location,scooter.location);
+        return Objects.equals(registrationNr, scooter.registrationNr) && Objects.equals(constructionYear, scooter.constructionYear) && Objects.equals(mileage, scooter.mileage) && Objects.equals(model, scooter.model) && Objects.equals(location, scooter.location) && Objects.equals(price,scooter.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(registrationNr, constructionYear, mileage, model,location);
+        return Objects.hash(registrationNr, constructionYear, mileage, model, location, price);
     }
 
     @Override

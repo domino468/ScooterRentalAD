@@ -3,6 +3,7 @@ package com.scooterrental.webapp.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,7 @@ public class UserService {
     public UserService(UserRepository userRepository) { this.userRepository = userRepository; }
 
     public List<User> findAllUsers() {
-        return userRepository.findAll().stream().collect(Collectors.toList());
+        return new ArrayList<>(userRepository.findAll());
     }
 
     public void create(User user) {

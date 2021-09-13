@@ -17,6 +17,7 @@ public interface ScooterRepository extends JpaRepository<Scooter, Long> {
 
     void deleteByRegistrationNr(String registrationNr);
 
-    void storeScooter(Scooter scooter);
+    List<Scooter> findByPrice(String price);
+
 
 }

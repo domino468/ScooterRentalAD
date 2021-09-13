@@ -36,6 +36,7 @@ public class ScooterService {
     public Scooter createScooter(Scooter scooter) {
         return scooterRepository.save(scooter);
     }
+
     Scooter update(String registrationNr, Scooter updatedScooter) {
         Optional<Scooter> optionalScooter = scooterRepository
                 .findByRegistrationNr((registrationNr));
@@ -49,11 +50,11 @@ public class ScooterService {
         scooterRepository.deleteByRegistrationNr(registrationNr);
     }
 
-    public List<Scooter> findByLocation(String location){
-        return  scooterRepository.findByLocation(location);
+    public List<Scooter> findByLocation(String location) {
+        return scooterRepository.findByLocation(location);
     }
-
-
-
+public List<Scooter> findByPrice(String price){
+        return  scooterRepository.findByPrice("");
+}
 
 }

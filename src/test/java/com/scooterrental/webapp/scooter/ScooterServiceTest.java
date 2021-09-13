@@ -63,9 +63,10 @@ class ScooterServiceTest {
         List<Scooter> allScooters = scooterService.findAllScooters();
         assertThat(allScooters.isEmpty());
     }
+
     //is it good ?
     @Test
-    void shouldFindScooterByLocation(){
+    void shouldFindScooterByLocation() {
         //given
         Scooter scooter = new Scooter();
         scooter.setConstructionYear(2021);
@@ -78,6 +79,23 @@ class ScooterServiceTest {
         List<Scooter> findByLocation = scooterService.findByLocation(scooter.getLocation());
         //then
         assertThat(findByLocation).contains(scooter);
+    }
+
+    @Test
+    void shouldCheckScooterByPrice() {
+        //given
+        Scooter scooter = new Scooter();
+        scooter.setConstructionYear(2021);
+        scooter.setMileage(1);
+        scooter.setRegistrationNr("");
+        scooter.setModel("");
+        scooter.setLocation("140NW");
+        scooter.setPrice("");
+        scooterService.createScooter(scooter);
+        //when
+        List<Scooter> findByPrice = scooterService.findByPrice(scooter.getPrice());
+        //then
+        assertThat(findByPrice).containsExactly(scooter);
     }
 //    @Test
 //    void shouldCheckIfScooterIsUpdated() {

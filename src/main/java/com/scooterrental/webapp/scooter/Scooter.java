@@ -1,7 +1,5 @@
 package com.scooterrental.webapp.scooter;
 
-import com.scooterrental.webapp.Station.String;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -13,7 +11,7 @@ public class Scooter {
     private Integer mileage;
     private java.lang.String model;
     private java.lang.String location;
-    private Integer price;
+    private String price;
 
     public void setRegistrationNr(java.lang.String registrationNr) {
         this.registrationNr = registrationNr.strip();
@@ -26,7 +24,7 @@ public class Scooter {
     public Scooter() {
     }
 
-    public Scooter(java.lang.String registrationNr, Integer constructionYear, Integer mileage, java.lang.String model, java.lang.String location, Integer price) {
+    public Scooter(java.lang.String registrationNr, Integer constructionYear, Integer mileage, java.lang.String model, java.lang.String location, String price) {
         this.registrationNr = registrationNr;
         this.constructionYear = constructionYear;
         this.mileage = mileage;
@@ -35,9 +33,9 @@ public class Scooter {
         this.price = price;
     }
 
-    public Integer getPrice() { return price; }
+    public String getPrice() { return price; }
 
-    public void setPrice(Integer price) { this.price = price; }
+    public void setPrice(String price) { this.price = price; }
 
     public java.lang.String getRegistrationNr() {
         return registrationNr;

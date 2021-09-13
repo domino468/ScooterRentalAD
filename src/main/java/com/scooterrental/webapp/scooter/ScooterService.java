@@ -5,6 +5,7 @@ import com.scooterrental.webapp.util.MessagesBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.stream.Location;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,7 @@ public class ScooterService {
     public Scooter createScooter(Scooter scooter) {
         return scooterRepository.save(scooter);
     }
+
     Scooter update(String registrationNr, Scooter updatedScooter) {
         Optional<Scooter> optionalScooter = scooterRepository
                 .findByRegistrationNr((registrationNr));
@@ -48,7 +50,11 @@ public class ScooterService {
         scooterRepository.deleteByRegistrationNr(registrationNr);
     }
 
-    public List<Scooter> findByLocation(String location){
-        return  scooterRepository.findByLocation(location);
+    public List<Scooter> findByLocation(String location) {
+        return scooterRepository.findByLocation(location);
     }
+public List<Scooter> findByPrice(String price){
+        return  scooterRepository.findByPrice("");
+}
+
 }

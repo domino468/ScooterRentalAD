@@ -26,8 +26,8 @@ public class FinishRental {
         this.user = user;
         this.scooter = scooter;
         this.startLocation = startLocation;
-        this.returnDate = returnDate;
         this.endLocation = endLocation;
+        this.returnDate = returnDate;
         this.km = km;
     }
 

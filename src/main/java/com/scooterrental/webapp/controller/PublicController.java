@@ -1,6 +1,4 @@
 package com.scooterrental.webapp.controller;
-import com.scooterrental.webapp.Station.SelectedStation;
-import com.scooterrental.webapp.Station.StationService;
 import com.scooterrental.webapp.scooter.ScooterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +11,8 @@ class PublicController {
     @Autowired
     private ScooterService scooterService;
 
-    @Autowired
-    private StationService stationService;
 
-    @GetMapping
-    public String showForm(Model model) {
-        model.addAttribute("selectedStationBean", new SelectedStation());
-        model.addAttribute("stations", stationService.findAll());
-        return "fragments/search-rentals";
-    }
+
 
 //    @PostMapping
 //    public String processForm(Model model,

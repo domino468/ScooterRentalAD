@@ -9,8 +9,6 @@ import java.util.List;
 
 @Repository
 public interface RentalRepository extends JpaRepository<Rental, Integer> {
-    @Query("from Rental r where r.km > 0")
-    List<Rental> findRunningRentals();
 
     List<Rental> findByScooter(Scooter scooter);
 }

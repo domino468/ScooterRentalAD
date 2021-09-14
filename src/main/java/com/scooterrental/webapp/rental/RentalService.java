@@ -2,29 +2,40 @@ package com.scooterrental.webapp.rental;
 
 import com.scooterrental.webapp.scooter.Scooter;
 import com.scooterrental.webapp.scooter.ScooterService;
+import com.scooterrental.webapp.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class RentalService {
-
+    @Autowired
+    private FinishRentalRepository finishRentalRepository;
     @Autowired
     private RentalRepository rentalRepository;
-
     @Autowired
     private ScooterService scooterService;
+    @Autowired
+    private UserService userService;
 
-
-    public void create(Rental rental) {
-        rental.setId(null);
-        rental.setKm(null);
-        rental.setReturnDate(null);
+    public void create(String registrationNr, String userNumber ) {
+        Rental rental = new Rental();
+        rental.setTransactionNumber(UUID.randomUUID());
+        rental.setRentalDate(LocalDate.now());
+        rental.setScooter(scooterService.findByRegistrationNr(registrationNr));
+        rental.setDriver(userService.findByUserNumber(userNumber));
 
         rentalRepository.save(rental);
     }
+//sprawdzic czy mozna zakonczyc wypozycznie , jezeli nie to rzucic wyjatkiem , a jezeli ta kto nastepny punkt
+    //utworzyc nowego finish rental, nastepnie zapisac finish rental i usunac tego rentala ktory sie wlasnie zakancza
+    //flow do testu - najpierw musimy rozpoczac rental
+    //potem zakonczyc
+    // po zakonczneiu nie mozemy miec zadnego rentala w bazie ale musimy miec jeden obiekt finish rental w bazie !
 
     public void finish(Rental rental, FinishRental finishRental) {
         rental.setKm(finishRental.getKm());
@@ -34,7 +45,7 @@ public class RentalService {
     }
 
     public List<Rental> findRunningRentals() {
-        return rentalRepository.findRunningRentals();
+        return rentalRepository.findAll();
     }
 
 
@@ -56,18 +67,8 @@ public class RentalService {
         }
     }
 
-
     public boolean canFinish(Rental rental) {
-        return rental.getReturnDate() == null && rental.getKm() == null && rental.getEndLocation() == null;
-    }
+        return  finishRentalRepository.findByTransactionNumber(rental.getTransactionNumber()).isEmpty();
 
-
-    public boolean cleanDates(Rental rental, FinishRental finishRental) {
-        if (rental.getRentalDate().isAfter(finishRental.getReturnDate())) {
-            return false;
-        } else {
-            rental.setReturnDate(finishRental.getReturnDate());
-            return true;
-        }
     }
 }

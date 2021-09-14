@@ -29,8 +29,8 @@ class ScooterServiceTest {
         //when
         scooterService.createScooter(scooter);
         //then
-        Optional<Scooter> byRegistrationNr = scooterService.findByRegistrationNr("1");
-        assertThat(byRegistrationNr).isNotEmpty();
+        Scooter byRegistrationNr = scooterService.findByRegistrationNr("1");
+        assertThat(byRegistrationNr).isNotNull();
 
     }
 

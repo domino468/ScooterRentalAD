@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -28,4 +29,10 @@ public class UserService {
     }
 
     void deleteByFirstName(String firstName){userRepository.deleteByFirstName(firstName);}
+
+    public User findByUserNumber(String userNumber){
+        Optional<User> user = userRepository.findUserByUserNumber(userNumber);
+
+        return  user.orElseThrow(() ->  new RuntimeException("Could not Find User by user number!"));
+    }
 }

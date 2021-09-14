@@ -6,14 +6,16 @@ import java.util.Objects;
 @Entity
 public class Scooter {
     @Id
-    private java.lang.String registrationNr;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String registrationNr;
     private Integer constructionYear;
     private Integer mileage;
-    private java.lang.String model;
-    private java.lang.String location;
+    private String model;
+    private String location;
     private String price;
 
-    public void setRegistrationNr(java.lang.String registrationNr) {
+    public void setRegistrationNr(String registrationNr) {
         this.registrationNr = registrationNr.strip();
     }
 
@@ -24,13 +26,21 @@ public class Scooter {
     public Scooter() {
     }
 
-    public Scooter(java.lang.String registrationNr, Integer constructionYear, Integer mileage, java.lang.String model, java.lang.String location, String price) {
+    public Scooter(java.lang.String registrationNr, Integer constructionYear, Integer mileage, String model, String location, String price) {
         this.registrationNr = registrationNr;
         this.constructionYear = constructionYear;
         this.mileage = mileage;
         this.model = model;
         this.location = location;
         this.price = price;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getPrice() { return price; }
@@ -81,17 +91,25 @@ public class Scooter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Scooter scooter = (Scooter) o;
-        return Objects.equals(registrationNr, scooter.registrationNr) && Objects.equals(constructionYear, scooter.constructionYear) && Objects.equals(mileage, scooter.mileage) && Objects.equals(model, scooter.model) && Objects.equals(location, scooter.location) && Objects.equals(price,scooter.price);
+        return Objects.equals(id, scooter.id) && Objects.equals(registrationNr, scooter.registrationNr) && Objects.equals(constructionYear, scooter.constructionYear) && Objects.equals(mileage, scooter.mileage) && Objects.equals(model, scooter.model) && Objects.equals(location, scooter.location) && Objects.equals(price, scooter.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(registrationNr, constructionYear, mileage, model, location, price);
+        return Objects.hash(id, registrationNr, constructionYear, mileage, model, location, price);
     }
 
     @Override
-    public java.lang.String toString() {
-        return "(" + registrationNr + ") " + model;
+    public String toString() {
+        return "Scooter{" +
+                "id=" + id +
+                ", registrationNr='" + registrationNr + '\'' +
+                ", constructionYear=" + constructionYear +
+                ", mileage=" + mileage +
+                ", model='" + model + '\'' +
+                ", location='" + location + '\'' +
+                ", price='" + price + '\'' +
+                '}';
     }
 }
 

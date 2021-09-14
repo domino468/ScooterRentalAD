@@ -1,6 +1,5 @@
 package com.scooterrental.webapp.scooter;
 
-import com.scooterrental.webapp.Station.StationService;
 import com.scooterrental.webapp.util.MessagesBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +16,12 @@ public class ScooterService {
     @Autowired
     private ScooterRepository scooterRepository;
 
-    @Autowired
-    private StationService stationService;
 
-    public Optional<Scooter> findByRegistrationNr(String registrationNr) {
-        return scooterRepository.findByRegistrationNr(registrationNr);
+
+    public Scooter findByRegistrationNr(String registrationNr) {
+        Optional<Scooter> scooter = scooterRepository.findByRegistrationNr(registrationNr);
+
+        return  scooter.orElseThrow(() ->  new RuntimeException("Could not Find User by user number!"));
     }
 
     public List<Scooter> findByMileageGreaterThan(Integer mileage) {

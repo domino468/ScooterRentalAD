@@ -6,7 +6,7 @@ import com.scooterrental.webapp.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,26 +22,41 @@ public class RentalService {
     @Autowired
     private UserService userService;
 
-    public void create(String registrationNr, String userNumber ) {
+    public Rental create(String registrationNr, String userNumber , Integer km , double startLatitude, double startLongitude) {
         Rental rental = new Rental();
         rental.setTransactionNumber(UUID.randomUUID());
-        rental.setRentalDate(LocalDate.now());
+        rental.setRentalDate(LocalDateTime.now());
         rental.setScooter(scooterService.findByRegistrationNr(registrationNr));
         rental.setDriver(userService.findByUserNumber(userNumber));
-
-        rentalRepository.save(rental);
+        rental.setKm(km);
+        rental.setStartLatitude(startLatitude);
+        rental.setStartLongitude(startLongitude);
+        return  rentalRepository.save(rental);
     }
-//sprawdzic czy mozna zakonczyc wypozycznie , jezeli nie to rzucic wyjatkiem , a jezeli ta kto nastepny punkt
-    //utworzyc nowego finish rental, nastepnie zapisac finish rental i usunac tego rentala ktory sie wlasnie zakancza
-    //flow do testu - najpierw musimy rozpoczac rental
-    //potem zakonczyc
-    // po zakonczneiu nie mozemy miec zadnego rentala w bazie ale musimy miec jeden obiekt finish rental w bazie !
+//sprawdzic czy mozna zakonczyc wypozyczenie , jezeli nie to rzucic wyjatkiem , a jezeli ta kto nastepny punkt
 
-    public void finish(Rental rental, FinishRental finishRental) {
-        rental.setKm(finishRental.getKm());
-        rental.getScooter().setMileage(rental.getScooter().getMileage() + rental.getKm());
 
-        rentalRepository.save(rental);
+
+    public static FinishRental fromRental(Rental rental){
+        return new FinishRental(
+                rental.getTransactionNumber(),
+                rental.getRentalDate(),
+                rental.getScooter(),
+                rental.getDriver(),
+                rental.getKm(),
+                rental.getStartLatitude(),
+                rental.getStartLongitude());
+    }
+
+    public void finish(Rental rental , double endLatitude, double endLongitude, LocalDateTime returnDate) {
+        canFinish(rental);
+        FinishRental finishRental = fromRental(rental);
+        finishRental.setEndLatitude(endLatitude);
+        finishRental.setEndLongitude(endLongitude);
+        finishRental.setReturnDate(returnDate);
+        finishRentalRepository.save(finishRental);
+        rentalRepository.delete(rental);
+
     }
 
     public List<Rental> findRunningRentals() {
@@ -54,21 +69,11 @@ public class RentalService {
     }
 
 
-    public Optional<Rental> existsAndCanFinish(Integer id) {
-        if (id == null) {
-            return Optional.empty();
-        }
-        Optional<Rental> opt = rentalRepository.findById(id);
-        Rental rental;
-        if (opt.isPresent() && canFinish((rental = opt.get()))) {
-            return Optional.of(rental);
-        } else {
-            return Optional.empty();
+    public void canFinish(Rental rental ) {
+        boolean empty = finishRentalRepository.findByTransactionNumber(rental.getTransactionNumber()).isEmpty();
+        if (!empty){
+            throw new RentalAlreadyFinished(rental.getTransactionNumber());
         }
     }
 
-    public boolean canFinish(Rental rental) {
-        return  finishRentalRepository.findByTransactionNumber(rental.getTransactionNumber()).isEmpty();
-
-    }
 }

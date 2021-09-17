@@ -3,7 +3,7 @@ import com.scooterrental.webapp.scooter.Scooter;
 import com.scooterrental.webapp.user.User;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,7 +13,7 @@ public class Rental implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Integer id;
     private UUID transactionNumber;
-    private LocalDate rentalDate;
+    private LocalDateTime rentalDate;
     //1
     private Integer km;
     @ManyToOne
@@ -21,14 +21,14 @@ public class Rental implements Serializable {
     @ManyToOne
     private Scooter scooter;
     //2
-    private Long startLatitude;
+    private double startLatitude;
     //3
-    private Long startLongitude;
+    private double startLongitude;
 
     public Rental() {
     }
 
-    public Rental(UUID transactionNumber, LocalDate rentalDate, Integer km, User driver, Scooter scooter, Long startLatitude,  Long startLongitude) {
+    public Rental(UUID transactionNumber, LocalDateTime rentalDate, Integer km, User driver, Scooter scooter, Long startLatitude, Long startLongitude) {
         this.transactionNumber = transactionNumber;
         this.rentalDate = rentalDate;
         this.km = km;
@@ -46,20 +46,20 @@ public class Rental implements Serializable {
         this.transactionNumber = transactionNumber;
     }
 
-    public Long getStartLatitude() {
+    public double getStartLatitude() {
         return startLatitude;
     }
 
-    public void setStartLatitude(Long startLatitude) {
+    public void setStartLatitude(double startLatitude) {
         this.startLatitude = startLatitude;
     }
 
 
-    public Long getStartLongitude() {
+    public double getStartLongitude() {
         return startLongitude;
     }
 
-    public void setStartLongitude(Long startLongitude) {
+    public void setStartLongitude(double startLongitude) {
         this.startLongitude = startLongitude;
     }
 
@@ -72,11 +72,11 @@ public class Rental implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getRentalDate() {
+    public LocalDateTime getRentalDate() {
         return rentalDate;
     }
 
-    public void setRentalDate(LocalDate rentalDate) {
+    public void setRentalDate(LocalDateTime rentalDate) {
         this.rentalDate = rentalDate;
     }
 

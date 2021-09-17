@@ -6,6 +6,7 @@ import com.scooterrental.webapp.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 @Entity
@@ -20,16 +21,16 @@ public class FinishRental {
     @ManyToOne
     private Scooter scooter;
     private Long startLatitude;
-    private Long endLatitude;
+    private double endLatitude;
     private Long startLongitude;
-    private Long endLongitude;
-    private LocalDate returnDate;
+    private double endLongitude;
+    private LocalDateTime returnDate;
     private Integer km;
 
-    public FinishRental() {
+    public FinishRental(UUID transactionNumber, LocalDateTime rentalDate, Scooter scooter, User driver, Integer km, double startLatitude, double startLongitude) {
     }
 
-    public FinishRental(UUID transactionNumber, LocalDate rentalDate, User user, Scooter scooter, Long startLatitude, Long endLatitude, Long startLongitude, Long endLongitude, LocalDate returnDate, Integer km) {
+    public FinishRental(UUID transactionNumber, LocalDate rentalDate, User user, Scooter scooter, Long startLatitude, Long endLatitude, Long startLongitude, Long endLongitude, LocalDateTime returnDate, Integer km) {
         this.transactionNumber = transactionNumber;
         this.rentalDate = rentalDate;
         this.user = user;
@@ -90,11 +91,11 @@ public class FinishRental {
         this.startLatitude = startLatitude;
     }
 
-    public Long getEndLatitude() {
+    public double getEndLatitude() {
         return endLatitude;
     }
 
-    public void setEndLatitude(Long endLatitude) {
+    public void setEndLatitude(double endLatitude) {
         this.endLatitude = endLatitude;
     }
 
@@ -106,19 +107,19 @@ public class FinishRental {
         this.startLongitude = startLongitude;
     }
 
-    public Long getEndLongitude() {
+    public double getEndLongitude() {
         return endLongitude;
     }
 
-    public void setEndLongitude(Long endLongitude) {
+    public void setEndLongitude(double endLongitude) {
         this.endLongitude = endLongitude;
     }
 
-    public LocalDate getReturnDate() {
+    public LocalDateTime getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(LocalDate returnDate) {
+    public void setReturnDate(LocalDateTime returnDate) {
         this.returnDate = returnDate;
     }
 
